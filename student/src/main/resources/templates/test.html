@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>学生情報登録ページ</title>
+    <h1>学生情報登録ページ</h1>
+</head>
+<body>
+<form action="/studentList" method="post">
+    <p>学籍番号:<input type="text" name="txtNo"/></p>
+    <p>名前:<input type="text" name="txtName"/></p>
+    <p>学年:<select name="selGakunen">
+            <option value="">-- 学年は？ --</option>
+            <option value="1">1年生</option>
+            <option value="2">2年生</option>
+            <option value="3">3年生</option>
+        </select></p>
+    <p>性別:<input type="radio" name="seibetu" value="男"/>男性
+        <input type="radio" name="seibetu" value="女"/>女性
+        <input type="radio" name="seibetu" value="不明"/>不明
+    </p><br>
+    <button type="submit" style="width:200px;height:40px;">
+        登録</button>
+</form>
+</body>
+</html>
