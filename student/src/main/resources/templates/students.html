@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>学生一覧</title>
+</head>
+<body>
+<h1>学生一覧</h1>
+
+<table border="1">
+    <tr>
+        <th>学籍番号</th>
+        <th>名前</th>
+        <th>学年</th>
+    </tr>
+    <tr th:each="student : ${students}">
+        <td th:text="${student.studentId}"></td>
+        <td th:text="${student.studentName}"></td>
+        <td th:text="${student.gakunen}"></td>
+    </tr>
+</table>
+
+</body>
+</html>

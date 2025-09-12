@@ -19,13 +19,6 @@ public class HelloController {
         return "index";  // resources/templates/index.html を返す
     }
 
-    @GetMapping("/test")
-    public String test(Model model) {
-
-        return "test";  // resources/templates/index.html を返す
-    }
-
-
     @PostMapping("/profile")
     public String profile(@RequestParam("txtName") String param1
                         ,@RequestParam("txtHobby") String param2

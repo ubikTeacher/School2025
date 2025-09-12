@@ -1,4 +1,6 @@
 package com.example.student;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -6,7 +8,7 @@ public class DBSave {
     public static void main(String[] args) {
         // MySQL 接続情報
         String url
-                = "jdbc:mysql://172.16.0.160:3306/school2025";
+                = "jdbc:mysql://172.16.0.160:3306/School2025";
         String user = "ubkinfo";
         String password = "3731040";
 
