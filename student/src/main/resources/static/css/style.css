@@ -1,0 +1,17 @@
+table th{
+    background:linear-gradient(to bottom, lightblue, blue);
+    color:white;
+}
+.custom_btn{
+    background:linear-gradient(to bottom, lightblue, blue);
+    color:white;
+    width:120px;
+    height:40px;
+    font-size:16px;
+}
+
+.titlebar{
+    color:white;
+    background:linear-gradient(to bottom
+                            , lightblue, blue);
+}

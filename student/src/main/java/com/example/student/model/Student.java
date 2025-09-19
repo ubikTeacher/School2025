@@ -1,26 +1,51 @@
 package com.example.student.model;
 
+//学生テーブル列情報
 public class Student {
-    private int studentId;
+    //学籍番号
+    private Integer studentId;
+    //氏名
     private String studentName;
-    private int studentSeibetu;
+    //性別
+    private Integer studentSeibetu;
+    //コースID
+    private Integer courseId;
 
-    // デフォルトコンストラクタ
-    public Student() {}
-    // コンストラクタ
-    public Student(int studentId, String studentName, int studentSeibetu) {
-        this.studentId = studentId;
-        this.studentName = studentName;
-        this.studentSeibetu = studentSeibetu;
+    //学籍番号取得
+    public Integer getStudentId(){
+        return studentId;
+    }
+    //学籍番号設定
+    public void setStudentId(Integer studentId){
+        this.studentId=studentId;
     }
 
-    // Getter & Setter
-    public int getStudentId() { return studentId; }
-    public void setStudentId(int studentId) { this.studentId = studentId; }
+    //氏名取得
+    public String getStudentName(){
+        return studentName;
+    }
+    //氏名設定
+    public void setStudentName(String studentName){
+        this.studentName=studentName;
+    }
 
-    public String getStudentName() { return studentName; }
-    public void setStudentName(String studentName) { this.studentName = studentName; }
+    //性別取得
+    public Integer getStudentSeibetu(){
+        return studentSeibetu;
+    }
+    //性別設定
+    public void setStudentSeibetu(Integer studentSeibetu){
+        this.studentSeibetu=studentSeibetu;
+    }
 
-    public int getStudentSeibetu() { return studentSeibetu; }
-    public void setStudentSeibetu(int studentSeibetu) { this.studentSeibetu = studentSeibetu; }
+    //コースID取得
+    public Integer getCourseId(){
+        return courseId;
+    }
+    //コースID設定
+    public void setCourseId(Integer courseId){
+        this.courseId=courseId;
+    }
+
+
 }

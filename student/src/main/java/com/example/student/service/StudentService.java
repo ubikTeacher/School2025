@@ -9,15 +9,15 @@ import java.util.List;
 
 @Service
 public class StudentService {
-
     @Autowired
     private StudentDAO dao;
 
-    public void registerStudent(Student student) {
-        dao.insert(student);
-    }
-
-    public List<Student> getStudents() {
+    //全学生データ取得
+    public List<Student> getStudents(){
         return dao.findAll();
+    }
+    //学生データ新規登録
+    public void addStudent(Student s){
+
     }
 }

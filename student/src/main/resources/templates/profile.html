@@ -1,16 +1,21 @@
 <!DOCTYPE html>
-<html lang="ja"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>こんにちは</title>
 </head>
+<style>
+    h1{
+    color:red;
+    text-align:center;
+    }
+</style>
 <body>
-　<h1>私の自己紹介ページとなります</h1>
-　名前は<span th:text="${name}"></span>です！！<br>
-　趣味は<span th:text="${hobby}"></span>です！！<br>
-　星座は<span th:text="${seiza}"></span>です！！<br>
-　性別は<span th:text="${seibetu}"></span>です！！<br>
-　スポーツは<span th:text="${sports}"></span>です！！<br>
+<h1>私の自己紹介ページ</h1>
+名前は<span th:text="${name}"></span>です！<br>
+趣味は<span th:text="${hobby}"></span>です！<br>
+誕生日は<span th:text="${birth}"></span>です！<br>
+現在、<span th:text="${ed}"></span>に通っています！<br>
+最後の一言は、<span th:text="${ex}"></span>
 </body>
 </html>
