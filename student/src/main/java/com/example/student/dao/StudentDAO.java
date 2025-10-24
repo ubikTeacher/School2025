@@ -40,6 +40,7 @@ public class StudentDAO {
                 s.setStudentSeibetu(rs.getInt("student_seibetu"));
                 s.setCourseId(rs.getInt("course_id"));
                 s.setCourseName(rs.getString("course_name"));
+                s.setGakunen(rs.getInt("gakunen"));
                 //リストに学生データ追加
                 returnList.add(s);
             }
@@ -103,6 +104,7 @@ public class StudentDAO {
                 s.setStudentName(rs.getString("student_Name"));
                 s.setStudentSeibetu(rs.getInt("student_seibetu"));
                 s.setCourseId(rs.getInt("course_id"));
+                s.setGakunen(rs.getInt("gakunen"));
                 //セットした情報を返す
                 return s;
             }
@@ -120,12 +122,13 @@ public class StudentDAO {
         String sql;
         sql=	"INSERT "
                 + "INTO students( "
-                + "    student_id "
+                + "      student_id "
                 + "    , student_name "
                 + "    , student_seibetu "
                 + "    , course_id "
+                + "    , gakunen "
                 + ") "
-                + "VALUES (? , ? , ? , ? ); ";
+                + "VALUES (? , ? , ? , ? , ? ); ";
         //②DBに接続
         try(Connection conn
                     = DriverManager.getConnection(URL,USER,PASS);
@@ -140,6 +143,8 @@ public class StudentDAO {
             stmt.setInt(3,s.getStudentSeibetu());
             //コースID
             stmt.setInt(4, s.getCourseId());
+            //学年
+            stmt.setInt(5, s.getGakunen());
 
             //③SQLを実行
             stmt.executeUpdate();
@@ -158,6 +163,7 @@ public class StudentDAO {
             + "   student_name=? "
             + " , student_seibetu=? "
             + " , course_id=? "
+            + " , gakunen=? "
             + "WHERE student_id=?; ";
 
         //②DBに接続
@@ -167,13 +173,15 @@ public class StudentDAO {
         )
         {
            //氏名
-            stmt.setString(1,s.getStudentName());
+            stmt.setString(1, s.getStudentName());
             //性別
-            stmt.setInt(2,s.getStudentSeibetu());
+            stmt.setInt(2, s.getStudentSeibetu());
             //コースID
             stmt.setInt(3, s.getCourseId());
+            //学年
+            stmt.setInt(4, s.getGakunen());
             //学籍番号
-            stmt.setInt(4,s.getStudentId());
+            stmt.setInt(5, s.getStudentId());
 
             //③SQLを実行
             stmt.executeUpdate();

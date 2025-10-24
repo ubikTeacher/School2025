@@ -39,6 +39,18 @@
                 </select>
             </td>
         </tr>
+        <tr>
+            <td>学年</td>
+            <td>
+                <select th:field="*{gakunen}">
+                    <option value="" disabled selected>
+                        学年を選択してください</option>
+                    <option value="1">１年</option>
+                    <option value="2">２年</option>
+                    <option value="3">３年</option>
+                </select>
+            </td>
+        </tr>
     </table>
     <div style="padding-top:10px;">
         <button type="submit" class="custom_btn"

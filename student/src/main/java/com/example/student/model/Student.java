@@ -12,6 +12,8 @@ public class Student {
     private Integer courseId;
     //コース名
     private String courseName;
+    //学年
+    private Integer gakunen;
 
     //学籍番号取得
     public Integer getStudentId(){
@@ -56,6 +58,15 @@ public class Student {
     //コース名設定
     public void setCourseName(String courseName){
         this.courseName=courseName;
+    }
+
+    //学年取得
+    public Integer getGakunen(){
+        return gakunen;
+    }
+    //学年設定
+    public void setGakunen(Integer gakunen){
+        this.gakunen=gakunen;
     }
 
 }

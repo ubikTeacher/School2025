@@ -13,6 +13,7 @@
     <table border="1">
         <tr>
             <th>学籍番号</th>
+            <th>学年</th>
             <th>名前</th>
             <th>性別</th>
             <th>コース</th>
@@ -21,6 +22,7 @@
         </tr>
         <tr th:each="s:${students}">
             <td th:text="${s.studentId}"></td>
+            <td th:text="${s.gakunen}"></td>
             <td th:text="${s.studentName}"></td>
             <td th:text="${s.studentSeibetu == 0? '男性': (s.studentSeibetu == 1 ? '女性' : '不明')}"></td>
             <td th:text="${s.courseName}"></td>

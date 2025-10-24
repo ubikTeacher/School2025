@@ -1,89 +1,13 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>成績管理ナビゲーター</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        body {
-          margin: 0;
-          font-family: 'Inter', 'Noto Sans JP', sans-serif;
-          background-color: #0f1724;
-          color: #e6eef6;
-        }
-
-        /* ==== ナビゲーションバー ==== */
-        .navbar {
-          background: linear-gradient(90deg, #0b1220 0%, #102036 100%);
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 12px 32px;
-          box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-          position: sticky;
-          top: 0;
-          z-index: 100;
-        }
-
-        .navbar .logo {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-        }
-
-        .navbar .logo-icon {
-          background: linear-gradient(135deg, #60a5fa, #6ee7b7);
-          color: #042542;
-          border-radius: 10px;
-          padding: 8px 12px;
-          font-weight: 800;
-          font-size: 16px;
-        }
-
-        .navbar h1 {
-          font-size: 18px;
-          margin: 0;
-        }
-
-        .nav-links {
-          display: flex;
-          align-items: center;
-          gap: 18px;
-        }
-
-        .nav-links a {
-          color: #dbeafe;
-          text-decoration: none;
-          font-weight: 600;
-          transition: color 0.2s, background 0.2s;
-          padding: 6px 10px;
-          border-radius: 6px;
-        }
-
-        .nav-links a:hover {
-          background: rgba(255,255,255,0.05);
-          color: #60a5fa;
-        }
-
-        .btn-logout {
-          background: linear-gradient(90deg, #60a5fa, #6ee7b7);
-          color: #042542;
-          border: none;
-          padding: 8px 16px;
-          border-radius: 8px;
-          cursor: pointer;
-          font-weight: 700;
-          transition: opacity 0.2s;
-        }
-
-        .btn-logout:hover {
-          opacity: 0.9;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/mainStyle.css}">
 </head>
 <body>
-
 <header class="navbar">
     <div class="logo">
         <div class="logo-icon">成績</div>
@@ -91,9 +15,10 @@
     </div>
 
     <nav class="nav-links">
-        <a href="/top">トップ</a>
-        <a href="/students">学生一覧</a>
-        <a href="/courses">コース一覧</a>
+        <a href="/">トップ</a>
+        <a href="/studentList">学生</a>
+        <a href="/courseList">コース</a>
+        <a href="/kamokuList">科目</a>
         <a href="/grades">成績入力</a>
         <button class="btn-logout">ログアウト</button>
     </nav>
