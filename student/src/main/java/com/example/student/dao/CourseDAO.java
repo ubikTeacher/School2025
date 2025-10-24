@@ -1,15 +1,15 @@
 package com.example.student.dao;
 
+import com.example.student.model.Course;
 import org.springframework.stereotype.Repository;
-import com.example.student.model.Student;
 
-import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class StudentDAO {
+public class CourseDAO {
+    //DB接続情報
     private static final String URL
             = "jdbc:mysql://172.16.0.160:3306/School2025";
     private static final String USER
@@ -17,24 +17,25 @@ public class StudentDAO {
     private static final String PASS
             ="3731040";
 
-    //全学生
-    public List<Student> findAll(){
-        List<Student> returnList= new ArrayList<>();
-        String sql="SELECT * FROM students;";
+    //全コース取得
+    public List<Course> findAll(){
+        List<Course> returnList= new ArrayList<>();
+        String sql="SELECT * FROM course;";
 
         try(Connection conn
                     = DriverManager.getConnection(URL,USER,PASS);
             PreparedStatement stmt = conn.prepareStatement(sql);
             ResultSet rs=stmt.executeQuery())
         {
-            //とれた結果から学生情報のリストを作る
+            //とれた結果からコース情報のリストを作る
             while (rs.next()){
-                Student s = new Student();
-                s.setStudentId(rs.getInt("student_id"));
-                s.setStudentName(rs.getString("student_Name"));
-                s.setStudentSeibetu(rs.getInt("student_seibetu"));
+                Course s = new Course();
                 s.setCourseId(rs.getInt("course_id"));
-                //リストに学生データ追加
+                s.setCourseName(rs.getString("course_name"));
+                s.setMainTeacher(rs.getString("main_teacher"));
+                s.setSubTeacher(rs.getString("sub_teacher"));
+
+                //リストにコースデータ追加
                 returnList.add(s);
             }
         }
@@ -44,20 +45,19 @@ public class StudentDAO {
         }
         return returnList; //学生情報のリストを戻す
     }
-
-    //指定された学籍番号の学生情報がDBに存在するかチェックします。
+    //指定されたコースIDのコース情報がDBに存在するかチェックします。
     //存在する場合はTrue,存在しない場合はFalseで返します。
-    public boolean existsStudent(int id)
+    public boolean existsCourse(int id)
     {
         //①SQLを作成
-        String sql=	"SELECT * FROM students WHERE student_id=?; ";
+        String sql=	"SELECT * FROM course WHERE course_id=?; ";
         //②DBに接続
         try(Connection conn
                     = DriverManager.getConnection(URL,USER,PASS);
             PreparedStatement stmt = conn.prepareStatement(sql);
         )
         {
-            //③SQLを実行して結果をStudentクラスに入れる
+            //③SQLを実行
             stmt.setInt(1,id);//パラメータ設定
 
             ResultSet rs=stmt.executeQuery();
@@ -74,12 +74,11 @@ public class StudentDAO {
         //⑤存在していないのでfalseを返す
         return false;
     }
-
-    //指定された学籍番号の学生情報を取得
-    public Student getStudentById(int id)
+    //指定されたコースIDのコース情報を取得
+    public Course getCourseById(int id)
     {
         //①SQLを作成
-        String sql=	"SELECT * FROM students WHERE student_id=?; ";
+        String sql=	"SELECT * FROM course WHERE course_id=?; ";
         //②DBに接続
         try(Connection conn
                     = DriverManager.getConnection(URL,USER,PASS);
@@ -90,13 +89,13 @@ public class StudentDAO {
             stmt.setInt(1,id);//パラメータ設定
             ResultSet rs=stmt.executeQuery();
 
-            //④情報をセットしたStudentを返す
+            //④情報をセットしたコース情報を返す
             while (rs.next()){
-                Student s = new Student();
-                s.setStudentId(rs.getInt("student_id"));
-                s.setStudentName(rs.getString("student_Name"));
-                s.setStudentSeibetu(rs.getInt("student_seibetu"));
+                Course s = new Course();
                 s.setCourseId(rs.getInt("course_id"));
+                s.setCourseName(rs.getString("course_name"));
+                s.setMainTeacher(rs.getString("main_teacher"));
+                s.setSubTeacher(rs.getString("sub_teacher"));
                 //セットした情報を返す
                 return s;
             }
@@ -105,19 +104,19 @@ public class StudentDAO {
         {
             e.printStackTrace();
         }
-        return new Student();
+        return new Course();
     }
 
-    //学生データ新規登録
-    public void addStudent(Student s){
+    //コースデータ新規登録
+    public void addCourse(Course s){
         //①InsertのSQLを作る
         String sql;
         sql=	"INSERT "
-                + "INTO students( "
-                + "    student_id "
-                + "    , student_name "
-                + "    , student_seibetu "
-                + "    , course_id "
+                + "INTO course( "
+                + "    course_id "
+                + "    , course_name "
+                + "    , main_teacher "
+                + "    , sub_teacher "
                 + ") "
                 + "VALUES (? , ? , ? , ? ); ";
         //②DBに接続
@@ -126,14 +125,14 @@ public class StudentDAO {
             PreparedStatement stmt = conn.prepareStatement(sql);
             )
         {
-            //学籍番号
-            stmt.setInt(1,s.getStudentId());
-            //氏名
-            stmt.setString(2,s.getStudentName());
-            //性別
-            stmt.setInt(3,s.getStudentSeibetu());
             //コースID
-            stmt.setInt(4, s.getCourseId());
+            stmt.setInt(1,s.getCourseId());
+            //コース名
+            stmt.setString(2,s.getCourseName());
+            //主担任
+            stmt.setString(3,s.getMainTeacher());
+            //副担任
+            stmt.setString(4, s.getSubTeacher());
 
             //③SQLを実行
             stmt.executeUpdate();
@@ -144,15 +143,15 @@ public class StudentDAO {
         }
     }
 
-    //学生データ更新
-    public void editStudent(Student s){
+    //コースデータ更新
+    public void editCourse(Course s){
         //① UpdateのSQLを作る
         String sql;
-        sql="UPDATE students SET "
-            + "   student_name=? "
-            + " , student_seibetu=? "
-            + " , course_id=? "
-            + "WHERE student_id=?; ";
+        sql="UPDATE course SET "
+            + "   course_name=? "
+            + " , main_teacher=? "
+            + " , sub_teacher=? "
+            + "WHERE course_id=?; ";
 
         //②DBに接続
         try(Connection conn
@@ -160,14 +159,14 @@ public class StudentDAO {
             PreparedStatement stmt = conn.prepareStatement(sql);
         )
         {
-           //氏名
-            stmt.setString(1,s.getStudentName());
-            //性別
-            stmt.setInt(2,s.getStudentSeibetu());
+           //コース名
+            stmt.setString(1,s.getCourseName());
+            //主担任
+            stmt.setString(2,s.getMainTeacher());
+            //副担任
+            stmt.setString(3, s.getSubTeacher());
             //コースID
-            stmt.setInt(3, s.getCourseId());
-            //学籍番号
-            stmt.setInt(4,s.getStudentId());
+            stmt.setInt(4,s.getCourseId());
 
             //③SQLを実行
             stmt.executeUpdate();
@@ -178,12 +177,12 @@ public class StudentDAO {
         }
     }
 
-    //学生データ削除
-    public void deleteStudent(int id){
+    //コースデータ削除
+    public void deleteCourse(int id){
         //①InsertのSQLを作る
         String sql;
-        sql="DELETE FROM students "
-                + "WHERE student_id=?; ";
+        sql="DELETE FROM course "
+                + "WHERE course_id=?; ";
 
         //②DBに接続
         try(Connection conn
@@ -191,7 +190,7 @@ public class StudentDAO {
             PreparedStatement stmt = conn.prepareStatement(sql);
         )
         {
-            //学籍番号
+            //コースID
             stmt.setInt(1,id);
 
             //③SQLを実行

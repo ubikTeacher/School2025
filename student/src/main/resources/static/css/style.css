@@ -15,3 +15,8 @@ table th{
     background:linear-gradient(to bottom
                             , lightblue, blue);
 }
+.titlebar2{
+    color:white;
+    background:linear-gradient(to bottom
+                            ,coral, wheat);
+}

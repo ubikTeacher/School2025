@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>コース一覧</title>
+</head>
+<body>
+    <h1 class="titlebar2">コース一覧</h1>
+    <table border="1">
+        <tr>
+            <th>コースID</th>
+            <th>コース名</th>
+            <th>主担任</th>
+            <th>副担任</th>
+            <th>更新</th>
+            <th>削除</th>
+        </tr>
+        <tr th:each="s:${courses}">
+            <td th:text="${s.courseId}"></td>
+            <td th:text="${s.courseName}"></td>
+            <td th:text="${s.mainTeacher}"></td>
+            <td th:text="${s.subTeacher}"></td>
+            <td>
+                <a th:href="@{/courseList/edit/{id}(id=${s.courseId})}">
+                    <input type="button" value="更新"/>
+                </a>
+            </td>
+            <td>
+                <form th:action="@{/courseList/delete/{id}(id=${s.courseId})}"
+                      method ="post" >
+                    <input type="submit" value="削除"/>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <div style="padding-top:20px;">
+        <a th:href="@{/addCourse}">
+            <input type="button" value="新規追加"
+            class="custom_btn"/>
+        </a>
+    </div>
+</body>
+</html>

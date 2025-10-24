@@ -5,7 +5,10 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <title>学生一覧</title>
 </head>
-<body>
+<body style="background-image:url(dummy.png);
+                background-repeat: no-repeat;
+            background-size: 30% 100%;
+            background-position: 30% 0%">
     <h1 class="titlebar">学生一覧</h1>
     <table border="1">
         <tr>
@@ -13,12 +16,25 @@
             <th>名前</th>
             <th>性別</th>
             <th>コース</th>
+            <th>更新</th>
+            <th>削除</th>
         </tr>
         <tr th:each="s:${students}">
             <td th:text="${s.studentId}"></td>
             <td th:text="${s.studentName}"></td>
             <td th:text="${s.studentSeibetu == 0? '男性': (s.studentSeibetu == 1 ? '女性' : '不明')}"></td>
             <td th:text="${s.courseId}"></td>
+            <td>
+                <a th:href="@{/studentList/edit/{id}(id=${s.studentId})}">
+                    <input type="button" value="更新"/>
+                </a>
+            </td>
+            <td>
+                <form th:action="@{/studentList/delete/{id}(id=${s.studentId})}"
+                      method ="post" >
+                    <input type="submit" value="削除"/>
+                </form>
+            </td>
         </tr>
     </table>
     <div style="padding-top:20px;">

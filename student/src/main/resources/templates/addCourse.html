@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>コース情報登録ページ</title>
+</head>
+<body>
+<h1 class="titlebar">コース情報登録ページ</h1>
+<p th:if="${errorMessage}" th:text="${errorMessage}"
+   style="color:red;"></p>
+
+<form th:action="@{/addCourse}" th:Object="${course}" method="post">
+<table>
+    <tr>
+        <td>コースID</td>
+        <td><input type="text" th:field="*{courseId}" th:value="${course.courseId == 0 ? '' : course.courseId}"></td>
+    </tr>
+    <tr>
+        <td>コース名</td>
+        <td><input type="text" th:field="*{courseName}"></td>
+    </tr>
+    <tr>
+        <td>担任</td>
+        <td><input type="text" th:field="*{mainTeacher}"></td>
+    </tr>
+    <tr>
+        <td>副担任</td>
+        <td><input type="text" th:field="*{subTeacher}"></td>
+    </tr>
+</table>
+<button type="submit"
+        style="width:200px;height:40px;">登録</button>
+</form>
+</body>
+</html>
