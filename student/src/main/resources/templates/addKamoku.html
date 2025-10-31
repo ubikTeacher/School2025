@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/style.css}">
-    <title>コース情報編集ページ</title>
+    <title>科目情報登録ページ</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/mainStyle.css}">
 </head>
@@ -15,6 +15,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
         <link rel="stylesheet" th:href="@{/css/mainStyle.css}">
     </div>
+
     <nav class="nav-links">
         <a href="/">トップ</a>
         <a href="/studentList">学生</a>
@@ -25,31 +26,35 @@
         <button class="btn-logout">ログアウト</button>
     </nav>
 </header>
-<h1>コース情報編集ページ</h1>
-<form th:action="@{/editCourse}" th:Object="${course}" method="post">
-    <table>
-        <tr>
-            <td>コースID</td>
-            <td><span th:text="${course.courseId == 0 ? '' : course.courseId}"/>
-                <input type="hidden" th:field="*{courseId}"> </td>
-        </tr>
-        <tr>
-            <td>コース名</td>
-            <td><input type="text" th:field="*{courseName}"></td>
-        </tr>
-        <tr>
-            <td>担任</td>
-            <td><input type="text" th:field="*{mainTeacher}"></td>
-        </tr>
-        <tr>
-            <td>副担任</td>
-            <td><input type="text" th:field="*{subTeacher}"></td>
-        </tr>
-    </table>
-    <div style="padding-top:10px;">
-        <button type="submit" class="custom_btn"
-                style="width:120px;height:40px;">更新</button>
-    </div>
+<h1>科目情報登録ページ</h1>
+<p th:if="${errorMessage}" th:text="${errorMessage}"
+   style="color:red;"></p>
+
+<form th:action="@{/addKamoku}" th:Object="${kamoku}" method="post">
+<table>
+    <tr>
+        <td>科目ID</td>
+        <td><input type="text" th:field="*{kamokuId}" th:value="${kamoku.kamokuId == 0 ? '' : kamoku.kamokuId}"></td>
+    </tr>
+    <tr>
+        <td>科目名</td>
+        <td><input type="text" th:field="*{kamokuName}"></td>
+    </tr>
+    <tr>
+        <td>学期</td>
+        <td>
+            <select th:field="*{gakki}">
+                <option value="" disabled selected>
+                    学期を選択してください</option>
+                <option value="1">前期</option>
+                <option value="2">後期</option>
+                <option value="3">通年</option>
+            </select>
+        </td>
+    </tr>
+</table>
+<button type="submit"
+        style="width:200px;height:40px;">登録</button>
 </form>
 </body>
 </html>
