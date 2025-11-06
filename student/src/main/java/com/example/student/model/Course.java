@@ -6,6 +6,8 @@ public class Course {
     private Integer courseId;
     //コース名
     private String courseName;
+    //コース年数
+    private Integer courseYears;
     //主担任
     private String mainTeacher;
     //副担任
@@ -27,6 +29,15 @@ public class Course {
     //コース名設定
     public void setCourseName(String courseName){
         this.courseName=courseName;
+    }
+
+    //コース年数取得
+    public Integer getCourseYears(){
+        return courseYears;
+    }
+    //コース年数設定
+    public void setCourseYears(Integer courseYears){
+        this.courseYears=courseYears;
     }
 
     //主担任取得
