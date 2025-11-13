@@ -27,40 +27,54 @@
 </header>
 <main>
     <h1 th:text="${kamoku.kamokuName + 'の受講コース'}"></h1>
-    <table border="1">
+    <p th:if="${errorMessage}" th:text="${errorMessage}"
+       style="color:red;"></p>
+    <table border="1" style="background-color:transparent;">
         <tr>
-            <th>コース名</th>
-            <th>学年</th>
-            <th>更新</th>
+            <th style="width:200px;">コース名</th>
+            <th style="width:60px;">学年</th>
             <th>削除</th>
         </tr>
-        <tr th:each="s:${class}">
+        <tr th:each="s:${classlist}">
             <td th:text="${s.courseName}"></td>
             <td th:text="${s.gakunen}"></td>
             <td>
-                <a th:href="@{/classList/edit/{kid}/{cid}/{g}(kid=${s.kamokuId},cid=${s.courseId},g=${s.gakunen})}">
-                    <input type="button" value="更新"/>
-                </a>
-            </td>
-            <td>
-                <form th:action="@{/kamokuList/delete/{id}(id=${s.kamokuId})}"
+                <form th:action="@{/classList/delete/{kid}/{cid}/{gakunen}(kid=${s.kamokuId},cid=${s.courseId},gakunen=${s.gakunen})}"
                       method ="post" >
                     <input type="submit" value="削除"/>
                 </form>
             </td>
-            <td>
-                <a th:href="@{/kamokuList/editClass/{id}(id=${s.kamokuId})}">
-                    <input type="button" value="クラス選択"/>
-                </a>
-            </td>
         </tr>
     </table>
-    <div style="padding-top:20px;">
-        <a th:href="@{/addKamoku}">
-            <input type="button" value="新規追加"
-            class="custom_btn"/>
-        </a>
-    </div>
+    <form th:action="@{/classList/add}" th:object="${classNew}" method="post">
+        <table style="padding-top:10px;">
+            <tr>
+                <td><input type="hidden" th:field="*{kamokuId}" th:value="${kamoku.kamokuId}"></td>
+                <td  >
+                    <select th:field="*{courseId}" style="width:200px;">
+                        <option value="" disabled selected>
+                            コースを選択してください</option>
+                        <option th:each="c : ${courseList}"
+                                th:value="${c.courseId}"
+                                th:text="${c.courseName}">
+                        </option>
+                    </select>
+                </td>
+                <td  >
+                    <select th:field="*{gakunen}" style="width:60px;">
+                        <option value="" disabled selected>
+                            学年を選択してください</option>
+                        <option value="1">１年</option>
+                        <option value="2">２年</option>
+                        <option value="3">３年</option>
+                    </select>
+                </td>
+                <td>
+                    <input type="submit" value="新規追加"/>
+                </td>
+            </tr>
+        </table>
+    </form>
 </main>
 </body>
 </html>

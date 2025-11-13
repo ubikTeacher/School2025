@@ -2,6 +2,10 @@ table th{
     background:linear-gradient(to bottom, lightblue, blue);
     color:white;
 }
+table tr td{
+    background-color:white;
+    color:black;
+}
 .custom_btn{
     background:linear-gradient(to bottom, lightblue, blue);
     color:white;

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>科目一覧</title>
+    <title>教員一覧</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/mainStyle.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
@@ -26,46 +26,32 @@
     </nav>
 </header>
 <main>
-    <h1>科目一覧</h1>
+    <h1>教員一覧</h1>
     <table border="1">
         <tr>
-            <th>科目ID</th>
-            <th>科目名</th>
-            <th>学期</th>
+            <th>教員ID</th>
+            <th>教員名</th>
             <th>更新</th>
             <th>削除</th>
-            <th>クラス選択</th>
-            <th>成績入力</th>
         </tr>
-        <tr th:each="s:${kamoku}">
-            <td th:text="${s.kamokuId}"></td>
-            <td th:text="${s.kamokuName}"></td>
-            <td th:text="${s.gakki}"></td>
+        <tr th:each="s:${teachers}">
+            <td th:text="${s.teacherId}"></td>
+            <td th:text="${s.teacherName}"></td>
             <td>
-                <a th:href="@{/kamokuList/edit/{id}(id=${s.kamokuId})}">
+                <a th:href="@{/teacherList/edit/{id}(id=${s.teacherId})}">
                     <input type="button" value="更新"/>
                 </a>
             </td>
             <td>
-                <form th:action="@{/kamokuList/delete/{id}(id=${s.kamokuId})}"
+                <form th:action="@{/teacherList/delete/{id}(id=${s.teacherId})}"
                       method ="post" >
                     <input type="submit" value="削除"/>
                 </form>
             </td>
-            <td>
-                <a th:href="@{/classList/{id}(id=${s.kamokuId})}">
-                    <input type="button" value="クラス選択"/>
-                </a>
-            </td>
-            <td>
-                <a th:href="@{/seisekiList/{id}(id=${s.kamokuId})}">
-                    <input type="button" value="成績入力"/>
-                </a>
-            </td>
         </tr>
     </table>
     <div style="padding-top:20px;">
-        <a th:href="@{/addKamoku}">
+        <a th:href="@{/addTeacher}">
             <input type="button" value="新規追加"
             class="custom_btn"/>
         </a>

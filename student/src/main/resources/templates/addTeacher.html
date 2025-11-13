@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>教員情報登録ページ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/mainStyle.css}">
+</head>
+<body>
+<header class="navbar">
+    <div class="logo">
+        <div class="logo-icon">成績</div>
+        <h1>成績管理システム</h1>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" th:href="@{/css/mainStyle.css}">
+    </div>
+
+    <nav class="nav-links">
+        <a href="/">トップ</a>
+        <a href="/studentList">学生</a>
+        <a href="/courseList">コース</a>
+        <a href="/teacherList">教員</a>
+        <a href="/kamokuList">科目</a>
+        <a href="/grades">成績入力</a>
+        <button class="btn-logout">ログアウト</button>
+    </nav>
+</header>
+<h1>教員情報登録ページ</h1>
+<p th:if="${errorMessage}" th:text="${errorMessage}"
+   style="color:red;"></p>
+
+<form th:action="@{/addTeacher}" th:Object="${teacher}" method="post">
+<table>
+    <tr>
+        <td>科目ID</td>
+        <td><input type="text" th:field="*{teacherId}" th:value="${teacher.teacherId == 0 ? '' : teacher.teacherId}"></td>
+    </tr>
+    <tr>
+        <td>科目名</td>
+        <td><input type="text" th:field="*{teacherName}"></td>
+    </tr>
+</table>
+<button type="submit"
+        style="width:200px;height:40px;">登録</button>
+</form>
+</body>
+</html>

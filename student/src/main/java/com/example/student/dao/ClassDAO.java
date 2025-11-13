@@ -17,8 +17,8 @@ public class ClassDAO {
     private static final String PASS
             ="3731040";
 
-    //全コース取得
-    public List<Class> findAll()
+    //指定科目IDのデータを取得
+    public List<Class> findAllByKamokuId(int kid)
     {
         List<Class> returnList= new ArrayList<>();
         String sql=	"select "
@@ -31,13 +31,17 @@ public class ClassDAO {
                 + " left join School2025.kamoku k "
                 + "   on cl.kamoku_Id=k.kamoku_id "
                 + " left join School2025.course c "
-                + "   on cl.course_id=c.course_id ";
+                + "   on cl.course_id=c.course_id "
+                + "where cl.kamoku_Id=? ";
 
         try(Connection conn
                     = DriverManager.getConnection(URL,USER,PASS);
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            ResultSet rs=stmt.executeQuery())
-        {
+            PreparedStatement stmt = conn.prepareStatement(sql);)
+        {//③SQLを実行
+
+            stmt.setInt(1,kid);//パラメータ設定
+            ResultSet rs=stmt.executeQuery();
+
             //とれた結果からコース情報のリストを作る
             while (rs.next()){
                 Class s = new Class();
@@ -105,9 +109,7 @@ public class ClassDAO {
                 + "   on cl.kamoku_Id=k.kamoku_id "
                 + " left join School2025.course c "
                 + "   on cl.course_id=c.course_id "
-                + " where cl.kamoku_id=? "
-                + "   and cl.course_id=? "
-                + "   and cl.gakunen=? ";
+                + " where cl.kamoku_id=? ";
         //②DBに接続
         try(Connection conn
                     = DriverManager.getConnection(URL,USER,PASS);
@@ -174,12 +176,14 @@ public class ClassDAO {
     }
 
     //クラスデータ削除
-    public void deleteClass(int id)
+    public void deleteClass(int kid, int cid, int g)
     {
         //①InsertのSQLを作る
         String sql;
         sql="DELETE FROM class "
-                + "WHERE kamoku_id=?; ";
+                + "WHERE kamoku_id=? "
+                + " AND course_id=? "
+                + " AND gakunen=?; ";
 
         //②DBに接続
         try(Connection conn
@@ -187,8 +191,12 @@ public class ClassDAO {
             PreparedStatement stmt = conn.prepareStatement(sql);
         )
         {
-            //クラスID
-            stmt.setInt(1,id);
+            //科目ID
+            stmt.setInt(1,kid);
+            //コースID
+            stmt.setInt(2,cid);
+            //学年
+            stmt.setInt(3,g);
 
             //③SQLを実行
             stmt.executeUpdate();

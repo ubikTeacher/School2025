@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/style.css}">
-    <title>科目情報編集ページ</title>
+    <title>教員情報編集ページ</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/mainStyle.css}">
 </head>
 <body>
 <header class="navbar">
     <div class="logo">
-        <div class="logo-icon">成績</div>
+        <div class="logo-icon">教員</div>
         <h1>成績管理システム</h1>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
         <link rel="stylesheet" th:href="@{/css/mainStyle.css}">
@@ -25,29 +25,17 @@
         <button class="btn-logout">ログアウト</button>
     </nav>
 </header>
-<h1>科目情報編集ページ</h1>
-<form th:action="@{/editKamoku}" th:Object="${kamoku}" method="post">
+<h1>教員情報編集ページ</h1>
+<form th:action="@{/editTeacher}" th:Object="${teacher}" method="post">
     <table>
         <tr>
-            <td>科目ID</td>
-            <td><span th:text="${kamoku.kamokuId == 0 ? '' : kamoku.kamokuId}"/>
-                <input type="hidden" th:field="*{kamokuId}"> </td>
+            <td>教員ID</td>
+            <td><span th:text="${teacher.teacherId == 0 ? '' : teacher.teacherId}"/>
+                <input type="hidden" th:field="*{teacherId}"> </td>
         </tr>
         <tr>
-            <td>科目名</td>
-            <td><input type="text" th:field="*{kamokuName}"></td>
-        </tr>
-        <tr>
-            <td>学期</td>
-            <td>
-                <select th:field="*{gakki}">
-                    <option value="" disabled selected>
-                        学期を選択してください</option>
-                    <option value="1">前期</option>
-                    <option value="2">後期</option>
-                    <option value="3">通年</option>
-                </select>
-            </td>
+            <td>教員名</td>
+            <td><input type="text" th:field="*{teacherName}"></td>
         </tr>
     </table>
     <div style="padding-top:10px;">
