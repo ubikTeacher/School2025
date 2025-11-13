@@ -17,8 +17,6 @@
     <div class="logo">
         <div class="logo-icon">成績</div>
         <h1>成績管理システム</h1>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-        <link rel="stylesheet" th:href="@{/css/mainStyle.css}">
     </div>
     <nav class="nav-links">
         <a href="/">トップ</a>
@@ -31,7 +29,7 @@
     </nav>
 </header>
 <main>
-    <h1>学生一覧</h1>
+  <h1>学生一覧</h1>
     <table border="1">
         <tr>
             <th>学籍番号</th>
@@ -46,7 +44,8 @@
             <td th:text="${s.studentId}"></td>
             <td th:text="${s.gakunen}"></td>
             <td th:text="${s.studentName}"></td>
-            <td th:text="${s.studentSeibetu == 0? '男性': (s.studentSeibetu == 1 ? '女性' : '不明')}"></td>
+            <td th:text="${s.studentSeibetu == 0?
+             '男性': (s.studentSeibetu == 1 ? '女性' : '不明')}"></td>
             <td th:text="${s.courseName}"></td>
             <td>
                 <a th:href="@{/studentList/edit/{id}(id=${s.studentId})}">

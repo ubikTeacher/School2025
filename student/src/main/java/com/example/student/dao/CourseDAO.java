@@ -32,6 +32,7 @@ public class CourseDAO {
                 Course s = new Course();
                 s.setCourseId(rs.getInt("course_id"));
                 s.setCourseName(rs.getString("course_name"));
+                s.setCourseYears(rs.getInt("course_years"));
                 s.setMainTeacher(rs.getString("main_teacher"));
                 s.setSubTeacher(rs.getString("sub_teacher"));
 
@@ -94,6 +95,7 @@ public class CourseDAO {
                 Course s = new Course();
                 s.setCourseId(rs.getInt("course_id"));
                 s.setCourseName(rs.getString("course_name"));
+                s.setCourseYears(rs.getInt("course_years"));
                 s.setMainTeacher(rs.getString("main_teacher"));
                 s.setSubTeacher(rs.getString("sub_teacher"));
                 //セットした情報を返す
@@ -115,10 +117,11 @@ public class CourseDAO {
                 + "INTO course( "
                 + "    course_id "
                 + "    , course_name "
+                + "    , course_years "
                 + "    , main_teacher "
                 + "    , sub_teacher "
                 + ") "
-                + "VALUES (? , ? , ? , ? ); ";
+                + "VALUES (? , ? , ? , ? , ? ); ";
         //②DBに接続
         try(Connection conn
                     = DriverManager.getConnection(URL,USER,PASS);
@@ -129,10 +132,12 @@ public class CourseDAO {
             stmt.setInt(1,s.getCourseId());
             //コース名
             stmt.setString(2,s.getCourseName());
+            //コース年数
+            stmt.setInt(3,s.getCourseYears());
             //主担任
-            stmt.setString(3,s.getMainTeacher());
+            stmt.setString(4,s.getMainTeacher());
             //副担任
-            stmt.setString(4, s.getSubTeacher());
+            stmt.setString(5, s.getSubTeacher());
 
             //③SQLを実行
             stmt.executeUpdate();
@@ -149,6 +154,7 @@ public class CourseDAO {
         String sql;
         sql="UPDATE course SET "
             + "   course_name=? "
+            + " , course_years=? "
             + " , main_teacher=? "
             + " , sub_teacher=? "
             + "WHERE course_id=?; ";
@@ -161,12 +167,14 @@ public class CourseDAO {
         {
            //コース名
             stmt.setString(1,s.getCourseName());
+            //コース年数
+            stmt.setInt(2,s.getCourseYears());
             //主担任
-            stmt.setString(2,s.getMainTeacher());
+            stmt.setString(3,s.getMainTeacher());
             //副担任
-            stmt.setString(3, s.getSubTeacher());
+            stmt.setString(4, s.getSubTeacher());
             //コースID
-            stmt.setInt(4,s.getCourseId());
+            stmt.setInt(5,s.getCourseId());
 
             //③SQLを実行
             stmt.executeUpdate();

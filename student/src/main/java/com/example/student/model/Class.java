@@ -11,7 +11,6 @@ public class Class {
     private String courseName;
     //学年
     private Integer gakunen;
-
     //科目ID取得
     public Integer getKamokuId(){
         return kamokuId;
@@ -29,7 +28,6 @@ public class Class {
     public void setKamokuName(String kamokuName){
         this.kamokuName=kamokuName;
     }
-
     //コースID取得
     public Integer getCourseId(){
         return courseId;
@@ -47,7 +45,6 @@ public class Class {
     public void setCourseName(String courseName){
         this.courseName=courseName;
     }
-
     //学年取得
     public Integer getGakunen(){
         return gakunen;
@@ -56,6 +53,5 @@ public class Class {
     public void setGakunen(Integer gakunen){
         this.gakunen=gakunen;
     }
-
 
 }

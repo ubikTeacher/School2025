@@ -14,7 +14,7 @@
         <h1>成績管理システム</h1>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
         <link rel="stylesheet" th:href="@{/css/mainStyle.css}">
-    </div>
+     </div>
 
     <nav class="nav-links">
         <a href="/">トップ</a>
@@ -34,11 +34,22 @@
 <table>
     <tr>
         <td>コースID</td>
-        <td><input type="text" th:field="*{courseId}" th:value="${course.courseId == 0 ? '' : course.courseId}"></td>
+        <td><input type="text" th:field="*{courseId}" th:value="${course.courseId == 0 ? '' : course.courseId}" required ></td>
     </tr>
     <tr>
         <td>コース名</td>
         <td><input type="text" th:field="*{courseName}"></td>
+    </tr>
+    <tr>
+        <td>コース年数</td>
+        <td>
+            <select th:field="*{courseYears}">
+                <option value="" disabled selected>
+                    何年制かを選択してください</option>
+                <option value="2">２年制</option>
+                <option value="3">３年制</option>
+            </select>
+        </td>
     </tr>
     <tr>
         <td>担任</td>

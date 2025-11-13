@@ -20,7 +20,7 @@ public class KamokuDAO {
     //全科目取得
     public List<Kamoku> findAll(){
         List<Kamoku> returnList= new ArrayList<>();
-        String sql="SELECT * FROM kamoku;";
+        String sql="SELECT * FROM kamoku ORDER BY gakki;";
 
         try(Connection conn
                     = DriverManager.getConnection(URL,USER,PASS);
